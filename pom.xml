@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.himanshu.demo</groupId>
-	<artifactId>ideal-webapp</artifactId>
-	<name>Ideal Maven Webapp</name>
+	<artifactId>spring-with-jetty</artifactId>
+	<name>Spring With Jetty</name>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<repositories>
@@ -95,8 +95,8 @@
 
 	<modules>
 		<module>webapp-core-api</module>
-		<module>webapp-1</module>
-		<module>webapp-2</module>
+		<module>spring-1</module>
+		<!--<module>webapp-2</module>-->
 		<!--<module>webapp-package</module>-->
 	</modules>
 </project>
