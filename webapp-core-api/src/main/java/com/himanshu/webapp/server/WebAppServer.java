@@ -11,13 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.himanshu.webapp.context.DemoWebApp1;
-import com.himanshu.webapp.context.DemoWebApp2;
+import com.himanshu.webapp.context.WebApplicationContext;
 
 public class WebAppServer {
 	private Server jettyServer;
 	private int httpPort = 8080;
-	private DemoWebApp1 webApp1;
-	private DemoWebApp2 webApp2;
+	private WebApplicationContext webApp1;
+	//private WebApplicationContext webApp2;
 	
 	Logger LOG = LoggerFactory.getLogger(getClass());
 	
@@ -29,9 +29,9 @@ public class WebAppServer {
 
 	private void initWebAppContexts() {
 		webApp1 = new DemoWebApp1();
-		webApp2 = new DemoWebApp2();
+		//webApp2 = new DemoWebApp2();
 		webApp1.init(jettyServer);
-		webApp2.init(jettyServer);
+		//webApp2.init(jettyServer);
 		RequestLogHandler logHandler = new RequestLogHandler();
 		logHandler.setServer(jettyServer);
 		logHandler.setRequestLog(new RequestLog() {
@@ -115,7 +115,7 @@ public class WebAppServer {
 		try {
 			jettyServer.start();
 			webApp1.startContext();
-			webApp2.startContext();
+			//webApp2.startContext();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

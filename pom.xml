@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.himanshu.demo</groupId>
+	<groupId>com.himanshu.spring</groupId>
 	<artifactId>spring-with-jetty</artifactId>
 	<name>Spring With Jetty</name>
 	<version>0.0.1-SNAPSHOT</version>
@@ -19,6 +19,11 @@
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</releases>
+		</repository>
+		<repository>
+			<id>springsource-repo</id>
+			<name>SpringSource Repository</name>
+			<url>http://repo.springsource.org/release</url>
 		</repository>
 	</repositories>
 	
@@ -99,5 +104,13 @@
 		<!--<module>webapp-2</module>-->
 		<!--<module>webapp-package</module>-->
 	</modules>
+	<properties>
+		<slf4j-version>1.6.0</slf4j-version>
+		<logback-version>0.9.30</logback-version>
+		<spring-version>3.1.1.RELEASE</spring-version>
+		<jetty-version>6.1.26</jetty-version>
+		<commons-configuration>1.7</commons-configuration>
+		<jersey-version>1.11</jersey-version>
+	</properties>
 </project>
 

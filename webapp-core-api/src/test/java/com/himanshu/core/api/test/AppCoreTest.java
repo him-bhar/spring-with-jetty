@@ -16,8 +16,8 @@ public class AppCoreTest {
 		try {
 			File initConfigFile = new File(AppCoreTest.class.getResource("/server-init.file").toURI());
 			String parentLocation = initConfigFile.getParentFile().getParentFile().getParentFile().getParent();
-			System.setProperty("com.himanshu.webapp1.path", parentLocation+"/webapp-1"+"/src/main/webapp");
-			System.setProperty("com.himanshu.webapp2.path", parentLocation+"/webapp-2"+"/src/main/webapp");
+			System.setProperty("com.himanshu.webapp1.path", parentLocation+"/spring-1"+"/src/main/webapp");
+			//System.setProperty("com.himanshu.webapp2.path", parentLocation+"/webapp-2"+"/src/main/webapp");
 			AppCore core = new AppCore();
 			core.init();
 			core.start();
