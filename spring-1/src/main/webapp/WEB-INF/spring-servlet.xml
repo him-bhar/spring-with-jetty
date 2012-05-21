@@ -1,13 +1,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans     
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd ">
  
-	<context:component-scan base-package="com.himanshu.spring.mvc.controller" />
+<!-- 	<context:component-scan base-package="com.himanshu.spring.mvc.controller" /> -->
+	
+	<aop:aspectj-autoproxy />
  
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -21,22 +25,62 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="interceptors">
 			<list>
-				<ref bean="mvnInterceptor"></ref>
+				<ref bean="mvcInterceptor"></ref>
 			</list>
 		</property>
 		<property name="mappings">
 			<props>
 				<prop key="hello.htm">testcontroller</prop>
+				<prop key="hello-aop.htm">testControllerProxy</prop>
 			</props>
 		</property>
 	</bean>
 	
-	<bean id="mvnInterceptor" class="com.himanshu.spring.mvc.interceptor.MVCInterceptor">
+	<bean id="mvcInterceptor" class="com.himanshu.spring.mvc.interceptor.MVCInterceptor">
 	</bean>
 	
 	<bean id="testcontroller" class="com.himanshu.spring.mvc.controller.TestSimpleController">
 <!-- 		<property name="input" value="testjsp/input-mvc"></property> -->
 		<property name="success" value="testjsp/success-mvc"></property>
 	</bean>
+	
+	<bean id="beforeHijack" class="com.himanshu.spring.aop.BeforeHijack"></bean>
+	<bean id="afterHijack" class="com.himanshu.spring.aop.AfterHijack"></bean>
+	<bean id="afterThrowingHijack" class="com.himanshu.spring.aop.HijackThrowing"></bean>
+	<bean id="aroundHijack" class="com.himanshu.spring.aop.AroundHijack"></bean>
+	
+	<bean id="pointcutHijackBefore" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="beforeHijack"></property>
+		<property name="pattern" value=".*Request"></property>
+	</bean>
+	
+	<bean id="pointcutHijackAfter" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="afterHijack"></property>
+		<property name="pattern" value=".*Request"></property>
+	</bean>
+	
+	<bean id="pointcutHijackThrowing" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="afterThrowingHijack"></property>
+		<property name="pattern" value=".*Request"></property>
+	</bean>
+	
+	<bean id="pointcutHijackAround" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="aroundHijack"></property>
+		<property name="pattern" value=".*Request"></property>
+	</bean>
+	
+	<bean id="testControllerProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="testcontroller"></property>
+		<property name="interceptorNames">
+			<list>
+				<value>pointcutHijackBefore</value>
+				<value>pointcutHijackAfter</value>
+				<value>pointcutHijackThrowing</value>
+				<value>pointcutHijackAround</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="logBeforeAspectJ" class="com.himanshu.spring.aop.aspectj.LogBefore"></bean>
  
 </beans>

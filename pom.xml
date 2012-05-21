@@ -111,6 +111,7 @@
 		<jetty-version>6.1.26</jetty-version>
 		<commons-configuration>1.7</commons-configuration>
 		<jersey-version>1.11</jersey-version>
+		<aspectj-version>1.6.11</aspectj-version>
 	</properties>
 </project>
 
