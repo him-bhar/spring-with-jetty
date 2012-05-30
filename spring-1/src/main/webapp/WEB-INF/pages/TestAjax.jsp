@@ -33,6 +33,24 @@
       });
     }
     
+    $(document).ready(function() {
+       alert("HEEEEEE");
+ 	});
+    
+    function doAjax3() {
+        $.ajax({
+          url: 'ajax3.htm',
+          type: 'GET',
+          data: ({name : "me"}),
+          success: function(data) {
+            $('#time').html(data);
+          },
+          error: function(data) {
+          	alert("Failed: "+data);
+          }
+        });
+      }
+    
   </script>
 
 
@@ -43,6 +61,7 @@
 <body>
 ${message}
 <button id="demo" onclick="doAjax()" title="Button">Get the time!</button>
+<button id="demo2" onclick="doAjax3()" title="Button">Get the page!</button>
 <div id="time">
 </div>
 

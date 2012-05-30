@@ -98,5 +98,22 @@
 <!--             </list> -->
 <!--         </property> -->
 <!--     </bean> -->
+
+	<bean id="accountService" class="com.himanshu.spring.ws.AccountServiceImpl">
+		<!-- any additional properties, maybe a DAO? -->
+	</bean>
+<!-- 	<bean name="accountExporter" -->
+<!-- 		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"> -->
+<!-- 		<property name="service" ref="accountService" /> -->
+<!-- 		<property name="serviceInterface" value="com.himanshu.spring.ws.AccountService" /> -->
+<!-- 	</bean> -->
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<!-- does not necessarily have to be the same name as the bean to be exported -->
+		<property name="serviceName" value="AccountService" />
+		<property name="service" ref="accountService" />
+		<property name="serviceInterface" value="com.himanshu.spring.ws.AccountService" />
+		<!-- defaults to 1099 -->
+		<property name="registryPort" value="1199" />
+	</bean>
  
 </beans>

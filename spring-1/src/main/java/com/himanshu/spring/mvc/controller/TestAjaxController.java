@@ -53,6 +53,14 @@ public class TestAjaxController {
 		return "TestAjax";
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/ajax3.htm")
+	public String getAjaxHTMLPage () {
+		//ModelAndView result = new ModelAndView();
+		//result.setView(view)
+		//result.addObject("name", "HBK");
+		return "TestAjaxHTML";
+	}
+	
 	//Referencing another way to send JSON.
 	@RequestMapping(value = "/ajax2.htm", method = RequestMethod.GET)
 	protected void getJsonDataExample(HttpServletResponse response) {
@@ -68,5 +76,5 @@ public class TestAjaxController {
 	        } catch (HttpMessageNotWritableException p_Nwe) {
 	        }
 	    }
-	}	
+	}
 }
